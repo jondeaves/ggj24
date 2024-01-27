@@ -1,6 +1,12 @@
+'use client'
+import { MainContextProvider } from "./context";
+
 import Main from "./components/main";
-import { SubmissionForm } from "./components/submission-form";
 
 export default function Home() {
-  return <Main />;
+  return (
+    <MainContextProvider>
+      <Main />
+    </MainContextProvider>
+  )
 }
