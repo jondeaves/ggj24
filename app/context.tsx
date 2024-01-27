@@ -7,5 +7,5 @@ type Entry = {
 
 export const MainContext = createContext({
   entries: Array<Entry>(),
-  authors: Array<Entry>(),
+  authors: Array<string>(),
 });
