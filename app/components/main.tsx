@@ -42,6 +42,12 @@ function TextField({ addEntry }: { addEntry: Function }) {
         placeholder="Continue"
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyUp={(e) => {
+          console.log(e.key);
+          if (e.key == "Enter") {
+            addEntry(text);
+          }
+        }}
       />
       <button
         className="phrase-button text-white"
