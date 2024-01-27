@@ -32,14 +32,23 @@ function PreviousLine({ entry, turn }: { entry: any; turn: Number }) {
   );
 }
 
-function TextField() {
+function TextField({ addEntry }: { addEntry: Function }) {
+  const [text, setText] = useState("");
+
   return (
     <div className="flex flex-row w-3/5">
       <input
         className="phrase-input p-2 w-full italic"
         placeholder="Continue"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
-      <button className="phrase-button text-white">
+      <button
+        className="phrase-button text-white"
+        onClick={() => {
+          addEntry(text);
+        }}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -64,9 +73,10 @@ export default function Main() {
     { text: "A default first line", author: "Bot" },
     { text: "This is a game", author: "Maanas" },
   ]);
+  const [authors, setAuthors] = useState(["Maanas", "Jon"]);
 
   return (
-    <MainContext.Provider value={{ entries }}>
+    <MainContext.Provider value={{ entries, authors }}>
       <main className={satisfy.className}>
         <div className="main flex min-h-screen min-w-screen flex-col items-start justify-center p-24 space-y-4">
           <div className="flex flex-row">
@@ -76,7 +86,17 @@ export default function Main() {
             turn={entries.length}
             entry={entries[entries.length - 1]}
           />
-          <TextField />
+          <TextField
+            addEntry={(text: string) => {
+              setEntries([
+                ...entries,
+                {
+                  text,
+                  author: authors[entries.length % authors.length],
+                },
+              ]);
+            }}
+          />
         </div>
       </main>
     </MainContext.Provider>
