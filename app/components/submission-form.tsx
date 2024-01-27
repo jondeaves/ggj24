@@ -1,55 +1,50 @@
 'use client'
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useFormik } from 'formik';
+import { PlusIcon } from '@heroicons/react/24/outline'
+
 import { FormField } from "./form/form-field";
 import { Button } from "./form/button";
 import { TextField } from "./form/text-field";
+import { useMainContext } from "../context";
 
-interface SubmissionFormProps {
+type SubmissionFormProps = {
+  author: string;
+}
+
+type SubmissionFormic = {
   prompt: string;
 }
 
-export const SubmissionForm: FC = () => {
-  const [promptList, setPromptList] = useState<string[]>([])
-  const [isComplete, setIsComplete] = useState<boolean>(false)
+export const SubmissionForm: FC<SubmissionFormProps> = ({ author }) => {
+  const { addEntry } = useMainContext()
 
-  const formik = useFormik<SubmissionFormProps>({
+  const formik = useFormik<SubmissionFormic>({
     initialValues: {
       prompt: '',
     },
     onSubmit: values => {
-      setPromptList([
-        ...promptList,
-        values.prompt,
-      ])
+      addEntry({
+        text: values.prompt,
+        author,
+      })
 
       formik.resetForm()
     },
   });
 
-  const limitedPrompots = isComplete ? promptList : promptList.slice(promptList.length - 1)
-
-  const handleFinish = () => {
-    setIsComplete(!isComplete)
-
-    if (isComplete) {
-      setPromptList([])
-      formik.resetForm()
-    }
-  }
-
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full">
-      <FormField>
-        <TextField
-          id="prompt"
-          name="prompt"
-          type="text"
-          onChange={formik.handleChange}
-          value={formik.values.prompt}
-        />
-        <Button type="submit" onClick={formik.handleChange} />
-      </FormField>
+    <form onSubmit={formik.handleSubmit} className="w-full flex flex-row">
+      <TextField
+        id="prompt"
+        name="prompt"
+        type="text"
+        placeholder="What do you want to add?"
+        className="grow"
+        onChange={formik.handleChange}
+        value={formik.values.prompt}
+      />
+      <Button type="submit" onClick={formik.handleChange} aria-label="Add entry" Icon={<PlusIcon className="w-8 h-4" />} />
     </form>
   );
 }

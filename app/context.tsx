@@ -16,20 +16,24 @@ export type Entry = {
 export type MainContextState = {
   entries: Entry[];
   setEntries: Dispatch<SetStateAction<Entry[]>>,
+  addEntry: (entry: Entry) => void,
 
   authors: Author[];
   setAuthors: Dispatch<SetStateAction<Author[]>>,
+  addAuthor: (author: Author) => void,
 
   gameState: GameState;
-  setGameState: Dispatch<SetStateAction<GameState>>,
+  setGameState: (state: GameState) => void,
 }
 
 export const MainContext = createContext<MainContextState>({
   entries: [],
   setEntries: () => {},
+  addEntry: () => {},
 
   authors: [],
   setAuthors: () => {},
+  addAuthor: () => {},
 
   gameState: GameState.Pending,
   setGameState: () => {},
@@ -40,15 +44,40 @@ export const MainContextProvider = (props: PropsWithChildren) => {
   const [authors, setAuthors] = useState<Author[]>([]);
   const [gameState, setGameState] = useState<GameState>(GameState.Pending);
 
+  const addEntry = (entry: Entry) => {
+    setEntries([
+      ...entries,
+      entry,
+    ])
+  }
+
+  const addAuthor = (author: Author) => {
+    setAuthors([
+      ...authors,
+      author,
+    ])
+  }
+
+  const setGameStateWrapper = (state: GameState) => {
+    setGameState(state);
+
+    if (state === GameState.Pending) {
+      setEntries([]);
+      setAuthors([]);
+    }
+  }
+
   return (
     <MainContext.Provider
       value={{
         entries,
         setEntries,
+        addEntry,
         authors,
         setAuthors,
+        addAuthor,
         gameState,
-        setGameState,
+        setGameState: setGameStateWrapper,
       }}
     >
       {props.children}

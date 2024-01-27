@@ -4,7 +4,7 @@ interface FormFieldProps extends PropsWithChildren {}
 
 export const FormField: FC<FormFieldProps> = ({ children }) => {
   return (
-    <div className="flex flex-row w-3/5">
+    <div className="flex flex-row">
       {children}
     </div>
   );
