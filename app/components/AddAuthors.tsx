@@ -3,7 +3,6 @@
 import { FC } from "react";
 import { GameState, useMainContext } from "../context";
 import { PreviousLine } from "./previous-line";
-import { SubmissionForm } from "./submission-form";
 import { AddAuthorForm } from "./add-author-form";
 
 export const AddAuthors: FC = () => {
@@ -15,19 +14,22 @@ export const AddAuthors: FC = () => {
 
   return (
     <div className="flex flex-col gap-8 w-full">
+      <AddAuthorForm />
+
       {authors.length > 0 && (
         <div className="flex flex-col gap-2">
-          {authors.map((author, idx) => (
-            <PreviousLine
-              key={idx}
-              index={idx+1}
-              label={author}
-            />
-          ))}
+          <h2 className="text-lg font-bold tracking-wider">Players</h2>
+          <div className="flex flex-col gap-2">
+            {authors.map((author, idx) => (
+              <PreviousLine
+                key={idx}
+                index={idx+1}
+                label={author}
+              />
+            ))}
+          </div>
         </div>
       )}
-
-      <AddAuthorForm />
     </div>
   );
 }

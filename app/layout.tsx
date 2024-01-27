@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { twMerge } from "tailwind-merge";
+import Link from "next/link";
 
 import "./globals.css";
 
@@ -20,7 +22,8 @@ export default function RootLayout({
       <head>
 
       </head>
-      <body className={inter.className} suppressHydrationWarning={true}>
+      <body className={twMerge(inter.className, 'bg-bg-color')} suppressHydrationWarning={true}>
+        <a href="/" className="absolute right-4 top-4" >Reset</a>
         {children}
       </body>
     </html>

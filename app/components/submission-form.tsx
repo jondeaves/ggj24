@@ -26,13 +26,13 @@ export const SubmissionForm: FC = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full flex flex-row">
+    <form onSubmit={formik.handleSubmit} className="w-full flex flex-col gap-2 items-end xs:flex-row xs:gap-0 xs:items-left">
       <TextField
         id="prompt"
         name="prompt"
         type="text"
         placeholder="What do you want to add?"
-        className="grow rounded-r-none"
+        className="grow xs:rounded-r-none h-10"
         onChange={formik.handleChange}
         value={formik.values.prompt}
       />
@@ -40,9 +40,12 @@ export const SubmissionForm: FC = () => {
         type="submit"
         disabled={formik.values.prompt.length === 0}
         aria-label="Add entry"
-        className='rounded-l-none'
+        className='xs:rounded-l-none h-10 pr-4 xs:pr-2'
+        size="small"
         Icon={<PlusIcon className="w-8 h-4" />}
-      />
+      >
+        <span className="xs:sr-only">Add player</span>
+      </Button>
     </form>
   );
 }

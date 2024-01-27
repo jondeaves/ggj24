@@ -31,6 +31,31 @@ const buttonSize = {
   large: ' text-xl p-4'
 }
 
+type ButtonWrapperProps = {
+  disabledTooltip?: string
+} & PropsWithChildren
+
+const ButtonWrapper: FC<ButtonWrapperProps> = ({ children, disabledTooltip }) => {
+  if (disabledTooltip && disabledTooltip.length > 0) {
+    return <Tooltip content={disabledTooltip}>
+      {children}
+    </Tooltip>
+  }
+
+  return <div>
+    {children}
+  </div>
+}
+
+export const getButtonClasses = (
+  theme: ButtonTheme = 'primary',
+  size: ButtonSize = 'medium',
+  className = '',
+  disabled = false
+): string => {
+  return twMerge(buttonTheme[theme], buttonSize[size], 'h-full flex justify-center items-center', disabled ? 'bg-slate-400 cursor-not-allowed' : '', className)
+}
+
 export const Button: FC<ButtonProps> = ({
   onClick,
   Icon,
@@ -42,22 +67,11 @@ export const Button: FC<ButtonProps> = ({
   children,
   disabledTooltip,
   ...rest
-}) => {
-  let WrapperElement: any = React.Fragment
-  if (disabled && disabledTooltip) {
-    WrapperElement = Tooltip
-  }
-
-  <Tooltip content="Cannot">
-  Testing
-</Tooltip>
-
-  return (
-    <WrapperElement content={disabledTooltip}>
-      <button className={twMerge(buttonTheme[theme], buttonSize[size], className, disabled ? 'bg-slate-400' : '')} onClick={onClick} type={type} disabled={disabled} {...rest}>
-        {Icon}
-        {children}
-      </button>
-    </WrapperElement>
-  )
-}
+}) => (
+  <ButtonWrapper disabledTooltip={disabled ? disabledTooltip : undefined}>
+    <button className={getButtonClasses(theme, size, className, disabled)} onClick={onClick} type={type} disabled={disabled} {...rest}>
+      {Icon}
+      {children}
+    </button>
+  </ButtonWrapper>
+)

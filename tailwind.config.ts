@@ -14,6 +14,12 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        "bg-color": "#fadcf5",
+      },
+      screens: {
+        xs: "480px",
+      },
     },
   },
   plugins: [require("flowbite/plugin")],
