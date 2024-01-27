@@ -85,8 +85,9 @@ export default function Main() {
     <MainContext.Provider value={{ entries, authors }}>
       <main className={satisfy.className}>
         <div className="main flex min-h-screen min-w-screen flex-col items-start justify-center p-24 space-y-4">
-          <div className="flex flex-row">
+          <div className="flex flex-row space-x-3 items-center">
             <h1 className="text-xl font-bold">Poetry Chain</h1>
+            <button className="complete-button text-xs p-2">&#10003; Finish Game</button>
           </div>
           <PreviousLine
             turn={entries.length}
