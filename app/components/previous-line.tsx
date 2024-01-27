@@ -16,7 +16,7 @@ export const PreviousLine: FC<PreviousLineProps> = ({
 }) => {
   return (
     <div className="flex flex-row items-center w-full gap-2">
-      <p className="font-bold line-text">{index.toString()}</p>
+      <p className="font-bold text-gray-500">{index.toString()}</p>
       <p className="italic">{label}</p>
 
       {supLabel && (
