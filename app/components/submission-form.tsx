@@ -12,7 +12,7 @@ type SubmissionFormic = {
 }
 
 export const SubmissionForm: FC = () => {
-  const { addEntry } = useMainContext()
+  const { addEntry, authors, entries } = useMainContext()
 
   const formik = useFormik<SubmissionFormic>({
     initialValues: {
@@ -31,7 +31,7 @@ export const SubmissionForm: FC = () => {
         id="prompt"
         name="prompt"
         type="text"
-        placeholder="What do you want to add?"
+        placeholder={`${authors[entries.length % authors.length]} says...`}
         className="grow xs:rounded-r-none h-10"
         onChange={formik.handleChange}
         value={formik.values.prompt}
