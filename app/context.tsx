@@ -16,7 +16,7 @@ export type Entry = {
 export type MainContextState = {
   entries: Entry[];
   setEntries: Dispatch<SetStateAction<Entry[]>>,
-  addEntry: (entry: Entry) => void,
+  addEntry: (input: string) => void,
 
   authors: Author[];
   setAuthors: Dispatch<SetStateAction<Author[]>>,
@@ -44,10 +44,13 @@ export const MainContextProvider = (props: PropsWithChildren) => {
   const [authors, setAuthors] = useState<Author[]>([]);
   const [gameState, setGameState] = useState<GameState>(GameState.Pending);
 
-  const addEntry = (entry: Entry) => {
+  const addEntry = (input: string) => {
     setEntries([
       ...entries,
-      entry,
+      {
+        author: authors[entries.length % authors.length],
+        text: input
+      },
     ])
   }
 

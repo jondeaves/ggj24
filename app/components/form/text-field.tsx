@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, HTMLInputTypeAttribute } from "react";
+import { ChangeEvent, FC, HTMLInputTypeAttribute } from "react";import { twMerge } from 'tailwind-merge'
 
-interface TextFieldProps {
+type TextFieldProps = {
   id?: string;
   name?: string;
   value?: string;
@@ -15,7 +15,7 @@ export const TextField: FC<TextFieldProps> = ({
   ...props
 }) => (
   <input
-    className={`phrase-input p-2 w-full italic ${className}`}
+    className={twMerge(`rounded-lg p-2 w-full italic`, className)}
     autoComplete="off"
     {...props}
   />

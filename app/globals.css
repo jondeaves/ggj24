@@ -18,30 +18,8 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-.author-tag {
-  border-radius: 20px;
-  background-color: orchid;
-}
-
 .line-text {
   color: gray;
-}
-
-.phrase-input {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.phrase-button {
-  background-color: brown;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.complete-button {
-  background-color: lightseagreen;
-  color: white;
-  border-radius: 20px;
 }
 
 @layer utilities {

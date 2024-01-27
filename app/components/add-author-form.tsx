@@ -7,19 +7,19 @@ import { Button } from "./button";
 import { TextField } from "./form/text-field";
 import { useMainContext } from "../context";
 
-type SubmissionFormic = {
-  prompt: string;
+type AddAuthorFormic = {
+  author: string;
 }
 
-export const SubmissionForm: FC = () => {
-  const { addEntry } = useMainContext()
+export const AddAuthorForm: FC = () => {
+  const { authors, addAuthor } = useMainContext()
 
-  const formik = useFormik<SubmissionFormic>({
+  const formik = useFormik<AddAuthorFormic>({
     initialValues: {
-      prompt: '',
+      author: '',
     },
-    onSubmit: ({ prompt }) => {
-      addEntry(prompt)
+    onSubmit: ({ author }) => {
+      addAuthor(author)
 
       formik.resetForm()
     },
@@ -28,18 +28,18 @@ export const SubmissionForm: FC = () => {
   return (
     <form onSubmit={formik.handleSubmit} className="w-full flex flex-row">
       <TextField
-        id="prompt"
-        name="prompt"
+        id="author"
+        name="author"
         type="text"
-        placeholder="What do you want to add?"
+        placeholder={authors.length > 0 ? "Who else wants to play?" : "Who is playing?"}
         className="grow rounded-r-none"
         onChange={formik.handleChange}
-        value={formik.values.prompt}
+        value={formik.values.author}
       />
       <Button
         type="submit"
-        disabled={formik.values.prompt.length === 0}
-        aria-label="Add entry"
+        disabled={formik.values.author.length === 0}
+        aria-label="Add author"
         className='rounded-l-none'
         Icon={<PlusIcon className="w-8 h-4" />}
       />
