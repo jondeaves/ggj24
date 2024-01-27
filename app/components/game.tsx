@@ -25,7 +25,7 @@ export const Game: FC = () => {
         {entryCount > 0 && entries.slice(entries.length - entryCount).map((entry, idx) => (
           <PreviousLine
             key={idx}
-            index={idx+1}
+            index={entries.length - entryCount + idx + 1}
             label={entry.text}
             supLabel={entry.author}
           />

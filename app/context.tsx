@@ -1,4 +1,12 @@
-import { Dispatch, PropsWithChildren, SetStateAction, createContext, useContext, useState } from "react";
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  createContext,
+  useContext,
+  useState,
+} from "react";
+import { Rhymer } from "./components/rhyme/rhyme";
 
 export enum GameState {
   Pending,
@@ -15,16 +23,18 @@ export type Entry = {
 
 export type MainContextState = {
   entries: Entry[];
-  setEntries: Dispatch<SetStateAction<Entry[]>>,
-  addEntry: (input: string) => void,
+  setEntries: Dispatch<SetStateAction<Entry[]>>;
+  addEntry: (input: string) => void;
 
   authors: Author[];
-  setAuthors: Dispatch<SetStateAction<Author[]>>,
-  addAuthor: (author: Author) => void,
+  setAuthors: Dispatch<SetStateAction<Author[]>>;
+  addAuthor: (author: Author) => void;
 
   gameState: GameState;
-  setGameState: (state: GameState) => void,
-}
+  setGameState: (state: GameState) => void;
+
+  rhymer: any;
+};
 
 export const MainContext = createContext<MainContextState>({
   entries: [],
@@ -37,29 +47,29 @@ export const MainContext = createContext<MainContextState>({
 
   gameState: GameState.Pending,
   setGameState: () => {},
+
+  rhymer: (r: any) => r,
 });
 
 export const MainContextProvider = (props: PropsWithChildren) => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
   const [gameState, setGameState] = useState<GameState>(GameState.Pending);
+  const [rhymer, setRhymer] = useState(Rhymer());
 
   const addEntry = (input: string) => {
     setEntries([
       ...entries,
       {
         author: authors[entries.length % authors.length],
-        text: input
+        text: input,
       },
-    ])
-  }
+    ]);
+  };
 
   const addAuthor = (author: Author) => {
-    setAuthors([
-      ...authors,
-      author,
-    ])
-  }
+    setAuthors([...authors, author]);
+  };
 
   const setGameStateWrapper = (state: GameState) => {
     setGameState(state);
@@ -68,7 +78,7 @@ export const MainContextProvider = (props: PropsWithChildren) => {
       setEntries([]);
       setAuthors([]);
     }
-  }
+  };
 
   return (
     <MainContext.Provider
@@ -81,13 +91,14 @@ export const MainContextProvider = (props: PropsWithChildren) => {
         addAuthor,
         gameState,
         setGameState: setGameStateWrapper,
+        rhymer,
       }}
     >
       {props.children}
     </MainContext.Provider>
-  )
-}
+  );
+};
 
 export const useMainContext = () => {
-  return useContext(MainContext)
-}
+  return useContext(MainContext);
+};

@@ -21,15 +21,14 @@ export const AddAuthors: FC = () => {
           <h2 className="text-lg font-bold tracking-wider">Players</h2>
           <div className="flex flex-col gap-2">
             {authors.map((author, idx) => (
-              <PreviousLine
-                key={idx}
-                index={idx+1}
-                label={author}
-              />
+              <div className="flex flex-row items-center w-full gap-2">
+                <p className="font-bold text-gray-500">{(idx + 1).toString()}</p>
+                <p className="italic">{author}</p>
+              </div>
             ))}
           </div>
         </div>
       )}
     </div>
   );
-}
+};
