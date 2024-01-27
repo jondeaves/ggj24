@@ -27,7 +27,12 @@ export const SubmissionForm: FC = () => {
   const limitedPrompots = isComplete ? promptList : promptList.slice(promptList.length - 1)
 
   const handleFinish = () => {
-    setIsComplete(true)
+    setIsComplete(!isComplete)
+
+    if (isComplete) {
+      setPromptList([])
+      formik.resetForm()
+    }
   }
 
   return (
@@ -44,7 +49,7 @@ export const SubmissionForm: FC = () => {
 
       <div className="grid grid-cols-2 gap-2">
         <button type="submit" className="border p-2 rounded-md hover:bg-slate-600">Add</button>
-        <button type="button" className="border p-2 rounded-md hover:bg-slate-600" onClick={handleFinish}>Finish</button>
+        <button type="button" className="border p-2 rounded-md hover:bg-slate-600" onClick={handleFinish}>{isComplete ? 'Reset' : 'Finish'}</button>
       </div>
 
       {isComplete ? 'Completed Poem' : 'Previous line'}
