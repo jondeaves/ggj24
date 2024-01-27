@@ -38,6 +38,12 @@ body {
   border-bottom-right-radius: 10px;
 }
 
+.complete-button {
+  background-color: lightseagreen;
+  color: white;
+  border-radius: 20px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

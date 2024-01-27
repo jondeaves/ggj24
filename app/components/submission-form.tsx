@@ -1,6 +1,9 @@
 'use client'
 import { FC, useState } from "react";
 import { useFormik } from 'formik';
+import { FormField } from "./form/form-field";
+import { Button } from "./form/button";
+import { TextField } from "./form/text-field";
 
 interface SubmissionFormProps {
   prompt: string;
@@ -27,32 +30,26 @@ export const SubmissionForm: FC = () => {
   const limitedPrompots = isComplete ? promptList : promptList.slice(promptList.length - 1)
 
   const handleFinish = () => {
-    setIsComplete(true)
+    setIsComplete(!isComplete)
+
+    if (isComplete) {
+      setPromptList([])
+      formik.resetForm()
+    }
   }
 
   return (
-    <form onSubmit={formik.handleSubmit} className="flex flex-col gap-4 w-96 bg-slate-800 p-8">
-      <label htmlFor="prompt">Prompt</label>
-      <input
-        id="prompt"
-        name="prompt"
-        type="text"
-        onChange={formik.handleChange}
-        value={formik.values.prompt}
-        className='px-4 py-3 rounded-md text-black'
-      />
-
-      <div className="grid grid-cols-2 gap-2">
-        <button type="submit" className="border p-2 rounded-md hover:bg-slate-600">Add</button>
-        <button type="button" className="border p-2 rounded-md hover:bg-slate-600" onClick={handleFinish}>Finish</button>
-      </div>
-
-      {isComplete ? 'Completed Poem' : 'Previous line'}
-      <ul>
-        {limitedPrompots.map((prompt, idx) => (
-          <li key={idx}>{prompt}</li>
-        ))}
-      </ul>
+    <form onSubmit={formik.handleSubmit} className="w-full">
+      <FormField>
+        <TextField
+          id="prompt"
+          name="prompt"
+          type="text"
+          onChange={formik.handleChange}
+          value={formik.values.prompt}
+        />
+        <Button type="submit" onClick={formik.handleChange} />
+      </FormField>
     </form>
   );
 }
