@@ -27,7 +27,7 @@ export const Game: FC = () => {
 
         {entries.length === 0 && (
           <PreviousLine
-            label={authors.length === 1 ? "You got this!" : "You're up first"}
+            label={authors.length === 1 ? "You got this! " : "You're up first"}
             emphasise={true}
           />
         )}
