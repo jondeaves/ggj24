@@ -19,6 +19,9 @@ const config: Config = {
         "bg-secondary": "#840028",
         "bg-disabled": "#474243",
       },
+      fontSize: {
+        "2xs": "0.6rem",
+      },
       screens: {
         xs: "480px",
       },

@@ -57,7 +57,7 @@ export const SubmissionForm: FC = () => {
           id="entry"
           name="entry"
           type="text"
-          placeholder={`${authors[entries.length % authors.length]} says...`}
+          placeholder={`For line ${entries.length + 1} ${authors[entries.length % authors.length]} says...`}
           className="grow rounded-r-none h-10"
           onChange={formik.handleChange}
           value={formik.values.entry}

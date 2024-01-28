@@ -2,6 +2,7 @@ import { Dispatch, PropsWithChildren, SetStateAction, createContext, useContext,
 
 export enum GameState {
   Pending,
+  Style,
   Active,
   Completed,
 }
@@ -12,6 +13,8 @@ export type Entry = {
   text: string;
   author: Author;
 };
+
+export type PoemStyle = 'limerick' | 'sonnet' | 'haiku' | 'free'
 
 export type MainContextState = {
   entries: Entry[];
@@ -24,6 +27,9 @@ export type MainContextState = {
 
   gameState: GameState;
   setGameState: (state: GameState) => void,
+
+  poemStyle: PoemStyle;
+  setPoemStyle: (style: PoemStyle) => void,
 }
 
 export const MainContext = createContext<MainContextState>({
@@ -37,12 +43,16 @@ export const MainContext = createContext<MainContextState>({
 
   gameState: GameState.Pending,
   setGameState: () => {},
+
+  poemStyle: 'free',
+  setPoemStyle: () => {},
 });
 
 export const MainContextProvider = (props: PropsWithChildren) => {
   const [entries, setEntries] = useState<Entry[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
   const [gameState, setGameState] = useState<GameState>(GameState.Pending);
+  const [poemStyle, setPoemStyle] = useState<PoemStyle>('free')
 
   const addEntry = (input: string) => {
     setEntries([
@@ -63,11 +73,6 @@ export const MainContextProvider = (props: PropsWithChildren) => {
 
   const setGameStateWrapper = (state: GameState) => {
     setGameState(state);
-
-    if (state === GameState.Pending) {
-      setEntries([]);
-      setAuthors([]);
-    }
   }
 
   return (
@@ -81,6 +86,8 @@ export const MainContextProvider = (props: PropsWithChildren) => {
         addAuthor,
         gameState,
         setGameState: setGameStateWrapper,
+        poemStyle,
+        setPoemStyle
       }}
     >
       {props.children}
