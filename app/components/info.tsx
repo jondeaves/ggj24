@@ -21,19 +21,19 @@ export const Info: FC = () => {
         <Modal.Body>
           <div className="flex flex-col gap-8 items-end">
             <div className="space-y-6">
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="text-base leading-relaxed">
                 Poetry Chain is a game about coming together for communal hilarity.
                 Limericks, haikus, it&apos;s all on the table!
               </p>
 
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="text-base leading-relaxed">
                 It was made as part of the{' '}
                 <a href="https://globalgamejam.org/" rel="external" target="_blank">Global Game Jam 2024</a> and
                 was brought to life by a small team of strangers become friends at
                 the <a href="https://globalgamejam.org/jam-sites/2024/mohawk-college-fennell-campus" rel="external" target="_blank">Mohawk College Fennell Campus</a> in Hamilton, Ontario.
               </p>
 
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="text-base leading-relaxed">
                 Unleash your inner poet. Write the most absurd poem solo or
                 locally with friends!
               </p>

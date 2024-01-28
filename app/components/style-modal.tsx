@@ -32,7 +32,7 @@ export const StyleModal: FC<StyleModalProps> = ({
                   Choose this style
                 </Button>
               </h3>
-              <p className="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+              <p className="text-base leading-relaxed">
                 {style.description}
               </p>
             </div>
