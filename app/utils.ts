@@ -1,5 +1,17 @@
 import { PROMPTS } from "./constants/prompts";
 
+export const removeDuplicates = <T>(arr: T[]): T[] => {
+  const uniqueSet = new Set<T>();
+
+  return arr.filter((item: T) => {
+    if (!uniqueSet.has(item)) {
+      uniqueSet.add(item);
+      return true;
+    }
+    return false;
+  });
+};
+
 export const formatAuthorList = (authors: string[]) => {
   if (authors.length === 0) {
     return;
@@ -17,5 +29,7 @@ export const formatAuthorList = (authors: string[]) => {
 };
 
 export const getRandomPrompts = () => {
-  return PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
+  const uniquePrompts = removeDuplicates(PROMPTS);
+
+  return uniquePrompts[Math.floor(Math.random() * uniquePrompts.length)];
 };

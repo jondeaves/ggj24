@@ -32,11 +32,6 @@ export const SubmissionForm: FC = () => {
       entry: '',
     },
     onSubmit: ({ entry }) => {
-      console.log()
-      if (entry.indexOf(prompt) === -1) {
-        alert('You should use the prompt in your entry')
-        return;
-      }
       addEntry(entry)
 
       setPrompt(getRandomPrompts())
