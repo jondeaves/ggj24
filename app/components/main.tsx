@@ -30,8 +30,10 @@ export const Main: FC<MainProps> = ({
         {subTitle && subTitle.length > 0 && (<p className="text-xs">{subTitle}</p>)}
       </div>
 
+      {children}
+
       {ctaList.length > 0 && (
-        <div className="flex flex-row">
+        <div className="flex flex-row w-full justify-end">
           {ctaList.map((cta, idx) => (
             <React.Fragment key={idx}>
               {cta}
@@ -39,8 +41,6 @@ export const Main: FC<MainProps> = ({
           ))}
         </div>
       )}
-
-      {children}
     </div>
   </main>
 )

@@ -1,7 +1,6 @@
 'use client'
 import { FC, useState } from "react";
 import { useFormik } from 'formik';
-import { PlusIcon } from '@heroicons/react/24/outline'
 
 import { TextField } from "../form/text-field";
 import { useOnlineContext } from "../context/online-context";

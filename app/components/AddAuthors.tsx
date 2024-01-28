@@ -4,6 +4,7 @@ import { FC } from "react";
 import { GameState, useMainContext } from "../context";
 import { PreviousLine } from "./previous-line";
 import { AddAuthorForm } from "./add-author-form";
+import { formatAuthorList } from "../utils";
 
 export const AddAuthors: FC = () => {
   const { authors, gameState } = useMainContext();
@@ -13,23 +14,13 @@ export const AddAuthors: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8 w-full">
-      <AddAuthorForm />
+    <div className="flex flex-col gap-4 w-full">
+      <PreviousLine
+        supLabel={authors.length > 0 ? "Authors are" : "Who's first?"}
+        label={formatAuthorList(authors) || <>&nbsp;</>}
+      />
 
-      {authors.length > 0 && (
-        <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-bold tracking-wider text-secondary text-bold">Players</h2>
-          <div className="flex flex-col gap-2">
-            {authors.map((author, idx) => (
-              <PreviousLine
-                key={idx}
-                index={idx+1}
-                label={author}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      <AddAuthorForm />
     </div>
   );
 }

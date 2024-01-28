@@ -1,29 +1,21 @@
-import { FC } from "react";
-
-import { Entry } from "../context";
-import { Pill } from "./pill";
+import { FC, ReactNode } from "react";
+import { twMerge } from "tailwind-merge";
 
 type PreviousLineProps = {
-  index: Number
-  label: string
+  label?: string | ReactNode;
   supLabel?: string
+  emphasise?: boolean
 }
 
 export const PreviousLine: FC<PreviousLineProps> = ({
-  index,
   label,
-  supLabel
+  supLabel,
+  emphasise = false,
 }) => {
   return (
     <div className="flex flex-row items-center w-full gap-2">
-      <p className="font-bold text-neutral-500">{index.toString()}</p>
-      <p className="italic">{label}</p>
-
-      {supLabel && (
-        <Pill className='gap-1 ml-2' size='small'>
-          {supLabel}
-        </Pill>
-      )}
+      {supLabel && (<p className="font-bold text-sm tracking-wide text-bg-secondary pt-1">{supLabel}</p>)}
+      {label && (<p className={twMerge("xs:text-lg", emphasise ? 'italic' : '')}>{label}</p>)}
     </div>
   );
 }

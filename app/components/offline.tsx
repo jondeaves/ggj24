@@ -1,6 +1,5 @@
 "use client";
 
-import { Playfair_Display } from "next/font/google";
 import { useSearchParams } from "next/navigation";
 import { FC, ReactNode } from "react";
 
@@ -10,8 +9,7 @@ import { Game } from "./game";
 import { Button } from "./button";
 import { AddAuthors } from "./AddAuthors";
 import { LinkAsButton } from "./link-as-button";
-
-const satisfy = Playfair_Display({ subsets: ["latin"], weight: "400" });
+import { GameSummary } from "./game-summary";
 
 export const Offline: FC = () => {
   const searchParams = useSearchParams()
@@ -23,7 +21,7 @@ export const Offline: FC = () => {
   let actionLabel = 'Start game';
   let nextState = GameState.Active;
   let actionDisabled = authors.length === 0;
-  let actionDisabledMsg = 'Must have at least one player';
+  let actionDisabledMsg = 'Must have at least one authors';
 
   switch (gameState) {
     case GameState.Active:
@@ -31,10 +29,6 @@ export const Offline: FC = () => {
       nextState = GameState.Completed;
       actionDisabled = entries.length < authors.length
       actionDisabledMsg = 'Everyone should have a chance to play'
-      break;
-    case GameState.Completed:
-      actionLabel = 'Start over';
-      nextState = GameState.Pending;
       break;
     default:
       break;
@@ -44,18 +38,26 @@ export const Offline: FC = () => {
     setGameState(nextState);
   }
 
-  const ctaList: ReactNode[] = [
-    <Button key="create-btn" size="small" className={showOnlineLink && gameState === GameState.Pending ? "rounded-r-none border-r border-r-bg-color" : ""} onClick={handleActionBtn} disabled={actionDisabled} disabledTooltip={actionDisabledMsg}>
-      {actionLabel}
-    </Button>,
-  ]
+  const ctaList: ReactNode[] = []
 
   if (showOnlineLink && gameState === GameState.Pending) {
     ctaList.push(
-      <LinkAsButton key='online' href="/online" size="small" className="rounded-l-none">
+      <LinkAsButton key='online' href="/online" size="medium" className="rounded-r-none">
         Play online
       </LinkAsButton>
     )
+  }
+
+  if (gameState !== GameState.Completed) {
+    ctaList.push(
+      <Button key="create-btn" size="medium" className={showOnlineLink && gameState === GameState.Pending ? "rounded-l-none border-l border-l-bg-color" : ""} onClick={handleActionBtn} disabled={actionDisabled} disabledTooltip={actionDisabledMsg}>
+        {actionLabel}
+      </Button>
+    )
+  }
+
+  if (gameState === GameState.Completed) {
+    return <GameSummary />
   }
 
   return (

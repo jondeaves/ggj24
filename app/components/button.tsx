@@ -17,7 +17,7 @@ type ButtonProps = {
 } & PropsWithChildren
 
 const buttonTheme = {
-  primary: 'bg-rose-900 hover:bg-rose-800 text-white rounded-lg disabled:bg-rose-950 disabled:hover:bg-rose-950 disabled:text-neutral-200 disabled:cursor-not-allowed',
+  primary: `bg-rose-900 hover:bg-rose-800 text-white rounded-lg disabled:bg-[#736a6b] disabled:hover:bg-[#736a6b] disabled:text-neutral-200 disabled:cursor-not-allowed`,
 }
 
 const buttonSize = {

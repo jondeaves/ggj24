@@ -1,7 +1,6 @@
 'use client'
 import { FC } from "react";
 import { useFormik } from 'formik';
-import { PlusIcon } from '@heroicons/react/24/outline'
 
 import { Button } from "./button";
 import { TextField } from "./form/text-field";
@@ -26,25 +25,25 @@ export const SubmissionForm: FC = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full flex flex-col gap-2 items-end xs:flex-row xs:gap-0 xs:items-left">
+    <form onSubmit={formik.handleSubmit} className="w-full flex flex-row items-left">
       <TextField
         id="prompt"
         name="prompt"
         type="text"
         placeholder={`${authors[entries.length % authors.length]} says...`}
-        className="grow xs:rounded-r-none h-10"
+        className="grow rounded-r-none h-10"
         onChange={formik.handleChange}
         value={formik.values.prompt}
       />
       <Button
         type="submit"
-        disabled={formik.values.prompt.length === 0}
         aria-label="Add entry"
-        className='xs:rounded-l-none h-10 pr-4 xs:pr-2'
+        className='rounded-l-none h-10 pr-4'
         size="small"
-        Icon={<PlusIcon fill="#ffffff" className="w-8 h-4 fill-white text-white " />}
+        disabled={formik.values.prompt.length === 0}
+        disabledTooltip="Everyone has something they can say"
       >
-        <span className="xs:sr-only">Add entry</span>
+        Add
       </Button>
     </form>
   );
