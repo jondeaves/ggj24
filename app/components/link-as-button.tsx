@@ -17,7 +17,7 @@ export const LinkAsButton: FC<LinkAsButtonProps> = ({
   force = false,
   size = 'medium',
 }) => {
-  const btnClasses = getButtonClasses(size, className)
+  const btnClasses = getButtonClasses(size, 'primary', className)
 
   if (force) {
     return (

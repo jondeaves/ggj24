@@ -12,9 +12,11 @@ import { LinkAsButton } from "./link-as-button";
 import { GameSummary } from "./game-summary";
 import { StyleModal } from "./style-modal";
 import { POEM_STYLES } from "../constants/poem-styles";
+import { StyleExampleModal } from "./style-example-modal";
 
 export const Offline: FC = () => {
   const [styleIsOpen, setStyleIsOpen] = useState(false);
+  const [styleExampleIsOpen, setStyleExampleIsOpen] = useState(false)
   const searchParams = useSearchParams()
   const { gameState, setGameState, entries, authors, poemStyle, setPoemStyle } = useMainContext();
 
@@ -49,7 +51,6 @@ export const Offline: FC = () => {
   }
 
   const handleSubmitStyle = (style: PoemStyle) => {
-    console.log(`Updating to ${style}`)
     setPoemStyle(style);
     setStyleIsOpen(false);
     handleActionBtn()
@@ -60,9 +61,15 @@ export const Offline: FC = () => {
       setStyleIsOpen(true)
     }
 
-    console.log(`Up next: ${GameState[nextState]}`)
-
     setGameState(nextState);
+  }
+
+  const handleStyleExample = () => {
+    setStyleExampleIsOpen(true)
+  }
+
+  const handleCloseStyleExample = () => {
+    setStyleExampleIsOpen(false)
   }
 
   const ctaList: ReactNode[] = []
@@ -75,18 +82,18 @@ export const Offline: FC = () => {
     )
   }
 
-  // const matchedStyle = poemStyle && poemStyle !== 'free' ? POEM_STYLES.find(style => style.ident === poemStyle) : undefined;
-  // if (gameState === GameState.Active && matchedStyle) {
-  //   ctaList.push(
-  //     <LinkAsButton key='online' href="/online" size="medium" className="rounded-r-none">
-  //       Example of {matchedStyle.title}
-  //     </LinkAsButton>
-  //   )
-  // }
+  const matchedStyle = poemStyle && poemStyle !== 'free' ? POEM_STYLES.find(style => style.ident === poemStyle) : undefined;
+  if (gameState === GameState.Active && matchedStyle) {
+    ctaList.push(
+      <Button key='poem-style' theme="bare" size="medium" onClick={handleStyleExample}>
+        Example of {matchedStyle.title}
+      </Button>
+    )
+  }
 
   if (gameState === GameState.Pending) {
     ctaList.push(
-      <Button key="create-btn" size="medium" theme="bare" className={showOnlineCta && gameState === GameState.Pending ? "rounded-l-none border-l border-l-bg-color" : ""} onClick={handleActionBtn} disabled={actionDisabled} disabledTooltip={actionDisabledMsg}>
+      <Button key="create-btn" size="medium" className={showOnlineCta && gameState === GameState.Pending ? "rounded-l-none border-l border-l-bg-color" : ""} onClick={handleActionBtn} disabled={actionDisabled} disabledTooltip={actionDisabledMsg}>
         {actionLabel}
       </Button>
     )
@@ -108,6 +115,7 @@ export const Offline: FC = () => {
         <AddAuthors />
         <Game />
         <StyleModal isOpen={styleIsOpen} onClose={handleCloseStyle} onSubmit={handleSubmitStyle} />
+        <StyleExampleModal poemStyle={poemStyle} isOpen={styleExampleIsOpen} onClose={handleCloseStyleExample} />
       </>
     </Main>
   )

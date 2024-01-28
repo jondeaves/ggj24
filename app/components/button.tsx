@@ -5,6 +5,8 @@ import React from "react";
 
 export type ButtonSize = 'tiny' | 'small' | 'medium' | 'large'
 
+export type ButtonTheme = 'primary' | 'bare'
+
 type ButtonProps = {
   onClick?: (e: ChangeEvent<any>) => void
   type?: 'button' | 'submit' | 'reset'
@@ -46,9 +48,10 @@ const ButtonWrapper: FC<ButtonWrapperProps> = ({ children, disabledTooltip }) =>
 
 export const getButtonClasses = (
   size: ButtonSize = 'medium',
+  theme: ButtonTheme = 'primary',
   className = '',
 ): string => {
-  return twMerge(buttonTheme['primary'], buttonSize[size], 'h-full flex justify-center items-center', className)
+  return twMerge(buttonTheme[theme], buttonSize[size], 'h-full flex justify-center items-center', className)
 }
 
 export const Button: FC<ButtonProps> = ({
@@ -64,7 +67,7 @@ export const Button: FC<ButtonProps> = ({
   ...rest
 }) => (
   <ButtonWrapper disabledTooltip={disabled ? disabledTooltip : undefined}>
-    <button className={getButtonClasses(size, className)} onClick={onClick} type={type} disabled={disabled} {...rest}>
+    <button className={getButtonClasses(size, theme, className)} onClick={onClick} type={type} disabled={disabled} {...rest}>
       {Icon}
       {children}
     </button>
