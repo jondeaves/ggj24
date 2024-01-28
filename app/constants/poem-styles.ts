@@ -17,13 +17,13 @@ export const POEM_STYLES: ModalPoemStyles[] = [
     description:
       "Rhymes and syllables galore! The first, second and fifth lines rhyme and must have the same number of syllables. The third and fourth lines also rhyme using a different word! ",
     disabled: false,
-    example:
-      "The beach is super duper great\nBut water in my eyes, I hate\nRunning full speed on the sand \nSurfing with the entire band\nThe beach is super duper great",
+    lineSyllables: [null, null, null, null, null],
     rhymingLines: [
       [1, 2, 5],
       [3, 4],
     ],
-    lineSyllables: [null, null, null, null, null],
+    example:
+      "The beach is super duper great<br />But water in my eyes, I hate<br />Running full speed on the sand <br />Surfing with the entire band<br />The beach is super duper great",
   },
   {
     ident: "sonnet",
@@ -50,8 +50,8 @@ export const POEM_STYLES: ModalPoemStyles[] = [
     description:
       "Poems of utmost precision. The first and last lines are five syllables and second line requires seven. ",
     disabled: false,
-    example:
-      "Bones, aged a-creaky\nPress snooze, press snooze, press again\nOh, the lumbago",
+    example: 
+      "Bones, aged a-creaky<br />Press snooze, press snooze, press again<br />Oh, the lumbago",
     rhymingLines: [],
     lineSyllables: [5, 5, 7],
   },

@@ -2,6 +2,7 @@
 import { FC, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useSearchParams } from "next/navigation";
 
 import { Button } from "./button";
 import { TextField } from "./form/text-field";
@@ -10,24 +11,16 @@ import { getRandomPrompts } from "../utils";
 import { PoetryStyle } from "./rhyme/rhyme";
 import { POEM_STYLES } from "../constants/poem-styles";
 
-// Yup.addMethod(Yup.string, "containsPrompt", function (errorMessage) {
-//   return this.test(`test-card-type`, errorMessage, function (value) {
-//     const { path, createError } = this;
-
-//     return (
-//       getCardType(value).length > 0 ||
-//       createError({ path, message: errorMessage })
-//     );
-//   });
-// });
-
 type SubmissionFormic = {
   entry: string;
 };
 
 export const SubmissionForm: FC = () => {
+  const searchParam = useSearchParams()
+  const excludeDirty = searchParam.get('skipDirty') === 'true' || false
+        
   const { addEntry, authors, entries, poemStyle } = useMainContext();
-  const [prompt, setPrompt] = useState(getRandomPrompts());
+  const [prompt, setPrompt] = useState(getRandomPrompts(!excludeDirty));
 
   const poemStyleAttrs = POEM_STYLES.find((s) => s.ident == poemStyle);
   const poetryStyle = PoetryStyle({
@@ -43,8 +36,8 @@ export const SubmissionForm: FC = () => {
     onSubmit: ({ entry }) => {
       addEntry(entry);
 
-      setPrompt(getRandomPrompts());
-      formik.resetForm();
+      setPrompt(getRandomPrompt(!excludeDirty))
+      formik.resetForm()
     },
     validationSchema: Yup.object().shape({
       entry: Yup.string()

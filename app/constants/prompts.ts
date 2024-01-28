@@ -1,4 +1,4 @@
-export const PROMPTS = [
+export const CLEAN_PROMPTS = [
   "Wood",
   "Memory",
   "Low Effort",
@@ -118,3 +118,5 @@ export const PROMPTS = [
   "Wrong place, wrong time.",
   "Ant, meet boot.",
 ];
+
+export const DIRTY_PROMPTS = [];

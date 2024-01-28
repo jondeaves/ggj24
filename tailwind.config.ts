@@ -8,9 +8,6 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    fontSize: {
-      "2xs": "0.6rem",
-    },
     extend: {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
@@ -21,6 +18,9 @@ const config: Config = {
         "bg-color": "#fadcf5",
         "bg-secondary": "#840028",
         "bg-disabled": "#474243",
+      },
+      fontSize: {
+        "2xs": "0.6rem",
       },
       screens: {
         xs: "480px",
