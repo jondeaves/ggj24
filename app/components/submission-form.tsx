@@ -66,7 +66,7 @@ export const SubmissionForm: FC = () => {
           Add
         </Button>
       </div>
-      <p className="mt-2">Talk about “{prompt}”</p>
+      <p className="mt-2">Include “{prompt}”</p>
     </form>
   );
 }
