@@ -1,15 +1,6 @@
 "use client";
 
-import { Playfair_Display } from "next/font/google";
 import React, { FC, PropsWithChildren, ReactNode } from "react";
-
-import { GameState } from "../context";
-import { Game } from "./game";
-import { Button } from "./button";
-import { AddAuthors } from "./AddAuthors";
-import { LinkAsButton } from "./link-as-button";
-
-const satisfy = Playfair_Display({ subsets: ["latin"], weight: "400" });
 
 type MainProps = {
   title: string;
@@ -23,7 +14,7 @@ export const Main: FC<MainProps> = ({
   ctaList = [],
   children
 }) => (
-  <main className={satisfy.className}>
+  <main>
     <div className="main flex min-h-screen min-w-screen flex-col items-start justify-center space-y-4 max-w-xl p-8 xs:p-16 sm:p-24">
       <div className="flex flex-row gap-1">
         <h1 className="text-xl font-bold tracking-wider">{title}</h1>

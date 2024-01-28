@@ -1,3 +1,5 @@
+import { PROMPTS } from "./constants/prompts";
+
 export const formatAuthorList = (authors: string[]) => {
   if (authors.length === 0) {
     return;
@@ -12,4 +14,8 @@ export const formatAuthorList = (authors: string[]) => {
   }
 
   return finalArray.join(" and ");
+};
+
+export const getRandomPrompts = () => {
+  return PROMPTS[Math.floor(Math.random() * PROMPTS.length)];
 };

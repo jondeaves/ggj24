@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display } from "next/font/google";
+import { Itim } from "next/font/google";
 import { twMerge } from "tailwind-merge";
 
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
-const satisfy = Playfair_Display({ subsets: ["latin"], weight: "400" });
+const itim = Itim({ subsets: ['latin'], weight: ["400"] });
 
 export const metadata: Metadata = {
   title: "Poetry Chain",
@@ -42,7 +41,7 @@ export default function RootLayout({
         <meta name="msapplication-square310x310logo" content="mstile-310x310.png" />
 
       </head>
-      <body className={twMerge(inter.className, satisfy.className, 'bg-bg-color')} suppressHydrationWarning={true}>
+      <body className={twMerge(itim.className, 'bg-bg-color')} suppressHydrationWarning={true}>
         {children}
       </body>
     </html>
