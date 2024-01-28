@@ -72,9 +72,9 @@ export const SubmissionForm: FC = () => {
   });
 
   const currentSyllables = style.lineSyllables
-    ? style.lineSyllables[entries.length]?.toString() || "any number of"
+    ? style.lineSyllables[entries.length]?.toString() ?? "any number of"
     : "any number of";
-  const currentRhyme = style.getCurrentRhymingWord(entries) || "any word";
+  const currentRhyme = style.getCurrentRhymingWord(entries) ?? "any word";
 
   return (
     <form onSubmit={formik.handleSubmit} className="w-full">
