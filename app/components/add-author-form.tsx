@@ -1,7 +1,8 @@
 'use client'
+import { PlusIcon } from '@heroicons/react/24/outline'
 import { FC } from "react";
 import { useFormik } from 'formik';
-import { PlusIcon } from '@heroicons/react/24/outline'
+import { twMerge } from "tailwind-merge";
 
 import { Button } from "./button";
 import { TextField } from "./form/text-field";
@@ -26,7 +27,7 @@ export const AddAuthorForm: FC = () => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="w-full flex flex-row">
+    <form onSubmit={formik.handleSubmit} className='w-full flex flex-row'>
       <TextField
         id="author"
         name="author"
@@ -36,13 +37,16 @@ export const AddAuthorForm: FC = () => {
         onChange={formik.handleChange}
         value={formik.values.author}
       />
-      <Button
-        type="submit"
-        disabled={formik.values.author.length === 0}
-        aria-label="Add author"
-        className='rounded-l-none'
-        Icon={<PlusIcon className="w-8 h-4" />}
-      />
+      <div className="flex flex-row">
+        <Button
+          type="submit"
+          disabled={formik.values.author.length === 0}
+          aria-label="Add author"
+          className='rounded-l-none'
+        >
+          Add
+        </Button>
+      </div>
     </form>
   );
 }

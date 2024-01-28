@@ -18,7 +18,7 @@ export const AddAuthors: FC = () => {
 
       {authors.length > 0 && (
         <div className="flex flex-col gap-2">
-          <h2 className="text-lg font-bold tracking-wider">Players</h2>
+          <h2 className="text-lg font-bold tracking-wider text-secondary text-bold">Players</h2>
           <div className="flex flex-col gap-2">
             {authors.map((author, idx) => (
               <PreviousLine

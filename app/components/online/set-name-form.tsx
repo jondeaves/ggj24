@@ -15,22 +15,25 @@ type SetNameFormic = {
 
 export const SetNameForm: FC = () => {
   const { name, setName } = useOnlineContext()
-  const [isLoading, setIsLoading] = useState(false)
+  const [loadingState, setLoadingState] = useState<'JOIN'|'CREATE'|null>(null)
 
   const formik = useFormik<SetNameFormic>({
     initialValues: {
       name: '',
     },
-    onSubmit: ({ name }) => {
-      setName(name)
-      setIsLoading(true)
-
-      // formik.resetForm()
-    },
+    onSubmit: () => {}
   });
 
-  const isDisabled = isLoading || formik.values.name.length === 0
-  const disabledMsg = isLoading ? 'Fetching session' : `Can't start without your name`
+  const handleOnCreate = () => {
+    setLoadingState('CREATE');
+  }
+
+  const handleOnJoin = () => {
+    setLoadingState('JOIN');
+  }
+
+  const isDisabled = loadingState !== null || formik.values.name.length === 0
+  const disabledMsg = loadingState ? (loadingState === 'JOIN' ? 'Joining game' : 'Creating game') : `Can't start without your name`
 
   return (
     <form onSubmit={formik.handleSubmit} className="w-full md:flex md:flex-row">
@@ -40,31 +43,33 @@ export const SetNameForm: FC = () => {
         type="text"
         placeholder="Who is playing?"
         className="grow md:rounded-r-none"
-        disabled={isLoading}
+        disabled={loadingState !== null}
         onChange={formik.handleChange}
         value={formik.values.name}
       />
 
       <div className="flex flex-row mt-4 justify-end md:mt-0">
         <Button
-          type="submit"
+          type="button"
           aria-label="Set name"
           className={twMerge('rounded-r-none md:rounded-none border-r px-4 border-bg-color w-20')}
           disabled={isDisabled}
           disabledTooltip={disabledMsg}
-          Icon={isLoading ? <Loader className="w-6 h-6" /> : undefined}
+          Icon={loadingState === 'CREATE' ? <Loader className="w-6 h-6" /> : undefined}
+          onClick={handleOnCreate}
         >
-          {!isLoading && 'Create'}
+          {loadingState !== 'CREATE' && 'Create'}
         </Button>
         <Button
-          type="submit"
-          aria-label="Set name"
+          type="button"
+          aria-label="Join game"
           className={twMerge('rounded-l-none px-4 w-16')}
-          disabled={isLoading || formik.values.name.length === 0}
+          disabled={isDisabled}
           disabledTooltip={disabledMsg}
-          Icon={isLoading ? <Loader className="w-6 h-6" /> : undefined}
+          Icon={loadingState === 'JOIN' ? <Loader className="w-6 h-6" /> : undefined}
+          onClick={handleOnJoin}
         >
-        {!isLoading && 'Join'}
+        {loadingState !== 'JOIN' && 'Join'}
 
         </Button>
       </div>

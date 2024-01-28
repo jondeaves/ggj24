@@ -1,12 +1,12 @@
 'use client'
 import { OnlineContextProvider } from "../components/context/online-context";
 
-import OnlineMain from "../components/online-main";
+import { Online } from "../components/online";
 
-export default function Online() {
+export default function OnlinePage() {
   return (
     <OnlineContextProvider>
-      <OnlineMain />
+      <Online />
     </OnlineContextProvider>
   )
 }

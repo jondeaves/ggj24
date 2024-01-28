@@ -24,7 +24,7 @@ export const Pill: FC<PillProps> = ({
   return (
     <div
       className={twMerge(
-        "flex flex-row items-center bg-fuchsia-400 text-black rounded-full",
+        "flex flex-row items-center bg-rose-900 text-white rounded-full",
         pillSize[size],
         className
       )} {...props}

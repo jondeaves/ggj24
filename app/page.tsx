@@ -1,12 +1,14 @@
 'use client'
 import { MainContextProvider } from "./context";
 
-import Main from "./components/main";
+import { Info } from "./components/info";
+import { Offline } from "./components/offline";
 
 export default function Home() {
   return (
     <MainContextProvider>
-      <Main />
+      <Info />
+      <Offline />
     </MainContextProvider>
   )
 }

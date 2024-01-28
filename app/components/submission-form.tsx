@@ -42,9 +42,9 @@ export const SubmissionForm: FC = () => {
         aria-label="Add entry"
         className='xs:rounded-l-none h-10 pr-4 xs:pr-2'
         size="small"
-        Icon={<PlusIcon className="w-8 h-4" />}
+        Icon={<PlusIcon fill="#ffffff" className="w-8 h-4 fill-white text-white " />}
       >
-        <span className="xs:sr-only">Add player</span>
+        <span className="xs:sr-only">Add entry</span>
       </Button>
     </form>
   );

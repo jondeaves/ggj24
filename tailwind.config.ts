@@ -16,9 +16,20 @@ const config: Config = {
       },
       colors: {
         "bg-color": "#fadcf5",
+        "bg-secondary": "#840028",
       },
       screens: {
         xs: "480px",
+      },
+      animation: {
+        "reverse-slow-spin": "reverse-spin 3s linear infinite",
+      },
+      keyframes: {
+        "reverse-spin": {
+          from: {
+            transform: "rotate(360deg)",
+          },
+        },
       },
     },
   },

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import { twMerge } from "tailwind-merge";
-import Link from "next/link";
 
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const satisfy = Playfair_Display({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Poetry Chain",
@@ -19,11 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-
-      </head>
-      <body className={twMerge(inter.className, 'bg-bg-color')} suppressHydrationWarning={true}>
-        <a href="/" className="absolute right-4 top-4" >Reset</a>
+      <body className={twMerge(inter.className, satisfy.className, 'bg-bg-color')} suppressHydrationWarning={true}>
         {children}
       </body>
     </html>

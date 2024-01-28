@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  color: #333333
+}
+
+* {
+  color: inherit;
+}
+
+a {
+  border-bottom: 1px solid #840028;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
