@@ -20,7 +20,7 @@ export const Game: FC = () => {
           <PreviousLine
             key={idx}
             label={`“${entry.text}”`}
-            supLabel={`${entry.author} said `}
+            supLabel={`${entry.author} previously said `}
             emphasise={true}
           />
         ))}

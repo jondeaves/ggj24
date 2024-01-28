@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import { Tooltip } from 'flowbite-react';
 import React from "react";
 
-export type ButtonSize = 'small' | 'medium' | 'large'
+export type ButtonSize = 'tiny' | 'small' | 'medium' | 'large'
 
 type ButtonProps = {
   onClick?: (e: ChangeEvent<any>) => void
@@ -18,9 +18,11 @@ type ButtonProps = {
 
 const buttonTheme = {
   primary: `bg-rose-900 hover:bg-rose-800 text-white rounded-lg disabled:bg-[#736a6b] disabled:hover:bg-[#736a6b] disabled:text-neutral-200 disabled:cursor-not-allowed`,
+  bare: `text-slate-950`
 }
 
 const buttonSize = {
+  tiny: 'text-2xs px-2 py-1',
   small: 'text-xs px-4 py-2',
   medium: 'px-4 py-2',
   large: ' text-xl p-4'
