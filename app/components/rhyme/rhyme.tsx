@@ -34,7 +34,7 @@ export const Rhymer = () => {
 
     const syllables = words.map((word) =>
       word
-        ? rhymer.dict[word]?.filter((p) => ["0", "1", "2"].includes(p.at(-1)))
+        ? rhymer.dict[word]?.filter((p: any) => ["0", "1", "2"].includes(p.at(-1)))
             .length
         : 0
     );
@@ -107,8 +107,8 @@ export const PoetryStyle = ({
     }
 
     const currentRhymingWords = style.rhymingGraph[entries.length]
-      .map((i) => entries[i]?.text.split(" ").at(-1) || null)
-      .filter((x) => x);
+      .map((i: any) => entries[i]?.text.split(" ").at(-1) || null)
+      .filter((x: any) => x);
 
     const currentRhyme =
       currentRhymingWords.length > 0
