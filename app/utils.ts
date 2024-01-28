@@ -1,4 +1,4 @@
-import { PROMPTS } from "./constants/prompts";
+import { CLEAN_PROMPTS, DIRTY_PROMPTS } from "./constants/prompts";
 
 export const removeDuplicates = <T>(arr: T[]): T[] => {
   const uniqueSet = new Set<T>();
@@ -28,8 +28,13 @@ export const formatAuthorList = (authors: string[]) => {
   return finalArray.join(" and ");
 };
 
-export const getRandomPrompts = () => {
-  const uniquePrompts = removeDuplicates(PROMPTS);
+export const getRandomPrompt = (includeDirty = true) => {
+  let fullList = CLEAN_PROMPTS;
+  if (includeDirty) {
+    fullList = [...CLEAN_PROMPTS, ...DIRTY_PROMPTS];
+  }
+
+  const uniquePrompts = removeDuplicates(fullList);
 
   return uniquePrompts[Math.floor(Math.random() * uniquePrompts.length)];
 };

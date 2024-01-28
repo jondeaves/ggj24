@@ -6,26 +6,19 @@ import * as Yup from 'yup';
 import { Button } from "./button";
 import { TextField } from "./form/text-field";
 import { useMainContext } from "../context";
-import { getRandomPrompts } from "../utils";
-
-// Yup.addMethod(Yup.string, "containsPrompt", function (errorMessage) {
-//   return this.test(`test-card-type`, errorMessage, function (value) {
-//     const { path, createError } = this;
-
-//     return (
-//       getCardType(value).length > 0 ||
-//       createError({ path, message: errorMessage })
-//     );
-//   });
-// });
+import { getRandomPrompt } from "../utils";
+import { useSearchParams } from "next/navigation";
 
 type SubmissionFormic = {
   entry: string;
 }
 
 export const SubmissionForm: FC = () => {
+  const searchParam = useSearchParams()
+  const excludeDirty = searchParam.get('skipDirty') === 'true' || false
+
   const { addEntry, authors, entries } = useMainContext()
-  const [prompt, setPrompt] = useState(getRandomPrompts())
+  const [prompt, setPrompt] = useState(getRandomPrompt(!excludeDirty))
 
   const formik = useFormik<SubmissionFormic>({
     initialValues: {
@@ -34,7 +27,7 @@ export const SubmissionForm: FC = () => {
     onSubmit: ({ entry }) => {
       addEntry(entry)
 
-      setPrompt(getRandomPrompts())
+      setPrompt(getRandomPrompt(!excludeDirty))
       formik.resetForm()
     },
     validationSchema: Yup.object().shape({
