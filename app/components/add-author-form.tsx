@@ -49,7 +49,7 @@ export const AddAuthorForm: FC = () => {
         </div>
       </div>
       <p className="mt-2">
-        Discover your inner poet. Write a poem solo or with friends!
+        Unleash your inner poet. Write the most absurd poem solo or locally with friends!
       </p>
     </form>
   );
