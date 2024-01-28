@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "./button";
 import { TextField } from "./form/text-field";
 import { useMainContext } from "../context";
-import { getRandomPrompts } from "../utils";
+import { getRandomPrompt } from "../utils";
 import { PoetryStyle } from "./rhyme/rhyme";
 import { POEM_STYLES } from "../constants/poem-styles";
 
@@ -18,9 +18,9 @@ type SubmissionFormic = {
 export const SubmissionForm: FC = () => {
   const searchParam = useSearchParams()
   const excludeDirty = searchParam.get('skipDirty') === 'true' || false
-        
+
   const { addEntry, authors, entries, poemStyle } = useMainContext();
-  const [prompt, setPrompt] = useState(getRandomPrompts(!excludeDirty));
+  const [prompt, setPrompt] = useState(getRandomPrompt(!excludeDirty));
 
   const poemStyleAttrs = POEM_STYLES.find((s) => s.ident == poemStyle);
   const poetryStyle = PoetryStyle({
