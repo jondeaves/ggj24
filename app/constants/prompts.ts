@@ -115,4 +115,6 @@ export const PROMPTS = [
   "Turtles",
   "Heart of Gold",
   "Beach",
+  "Wrong place, wrong time.",
+  "Ant, meet boot.",
 ];

@@ -48,7 +48,9 @@ export const AddAuthorForm: FC = () => {
           </Button>
         </div>
       </div>
-      <p className="mt-2">You can have as many Authors as you want</p>
+      <p className="mt-2">
+        Discover your inner poet. Write a poem solo or with friends!
+      </p>
     </form>
   );
 }
